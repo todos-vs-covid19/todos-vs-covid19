@@ -1,0 +1,42 @@
+.home-container {
+    display: grid;
+    grid-template-areas: 'header header' 'side-bar main' 'side-bar footer';
+    grid-template-rows: 50px 1fr 30px;
+    grid-template-columns: auto 1fr;
+    height: 100vh;
+}
+
+header {
+    grid-area: header;
+    -webkit-box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.75);
+    box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.75);
+}
+
+.side_bar {
+    grid-area: side-bar;
+}
+
+main {
+    grid-area: main;
+}
+
+footer {
+    grid-area: footer;
+}
+
+#id-treeViewAttributes:hover{
+
+}
+div.dx-item dx-treeview-item{
+    height: 70px;
+    background: red;
+
+}
+.dx-state-selected > .dx-treeview-item{
+    color: rebeccapurple;
+}
+#bt-logout{
+   color: red;
+}
+

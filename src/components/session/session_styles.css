@@ -1,0 +1,20 @@
+.main_container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    height: 100vh;
+
+}
+
+#bt-session{
+    background-color: #F9A826;
+    font-weight: bold;
+    border-color: #F9A826;
+    color: white;
+}
+
+#bt-register{
+    background-color: #F9A826;
+    font-weight: bold;
+    border-color: #F9A826;
+    color: white;
+}
