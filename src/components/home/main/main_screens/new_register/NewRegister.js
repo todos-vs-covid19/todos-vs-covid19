@@ -9,6 +9,8 @@ import Form, {
 } from "devextreme-react/form";
 import {inject, observer} from "mobx-react";
 import {db} from '../../../../../firebase/Firebase'
+import notify from "devextreme/ui/notify";
+import {covid_symptoms_another_patient_init} from './SymptomsItems'
 
 function NewRegister(props) {
 
@@ -49,10 +51,20 @@ function NewRegister(props) {
         newPatient.id_user = id_user;
 
         //  console.log(new_patient)
-        patient_register.doc(covid_symptoms_another_patient.cedula).set({data: newPatient})
-            .then(function () {
-                console.log('registrado')
-            })
+        patient_register.doc(covid_symptoms_another_patient.cedula).get()
+            .then(function (doc) {
+                if (doc.exists) {
+                    notify({message: " Este paciente ya a sido registrado", width: 300,}, "error", 1000);
+                } else {
+                    patient_register.doc(covid_symptoms_another_patient.cedula).set({data: newPatient})
+                        .then(function () {
+                            SymptomsStore.getCovidSymptomsAnotherPatient(covid_symptoms_another_patient_init);
+                            notify({message: "Paciente registrado", width: 300,}, "success", 1500);
+                        })
+                }
+            }).catch(function () {
+            notify({message: "Error", width: 300,}, "error", 700);
+        })
     };
 
     return (
@@ -62,19 +74,19 @@ function NewRegister(props) {
                     <Form width={'100%'}
                           formData={covid_symptoms_another_patient}
                           validationGroup="Register"
+                          showColonAfterLabel={true}
                           showValidationSummary={true}
                     >
-                        <GroupItem caption={'Registrar otro paciente'}>
-
-                            <GroupItem colCount={3} caption={'Sintomas'}>
-                                {Object.entries(symptoms).map(items => {
-                                    return (
-                                        <SimpleItem key={items} dataField={items[0]} editorType="dxCheckBox"/>
-                                    )
-                                })}
-                            </GroupItem>
-
-                            <GroupItem caption={'Datos'}>
+                        <GroupItem caption={'Registrar otro paciente'} colCount={2}>
+                            <GroupItem>
+                                <GroupItem colCount={3} caption={'Sintomas'}>
+                                    {Object.entries(symptoms).map(items => {
+                                        return (
+                                            <SimpleItem key={items} dataField={items[0]} editorType="dxCheckBox"/>
+                                        )
+                                    })}
+                                </GroupItem>
+                                <GroupItem caption={'Datos'}>
                                 <SimpleItem dataField={'cedula'} editorType="dxTextBox"
                                             label={{text: 'Cédula/Pasaporte'}}>
                                     <RequiredRule message="Ingrese la cédula/pasaporte"/>
@@ -111,6 +123,9 @@ function NewRegister(props) {
                                 <SimpleItem dataField={'direccion'} editorType="dxTextBox">
                                     <RequiredRule message="Ingrese su dirección"/>
                                 </SimpleItem>
+                            </GroupItem>
+                            </GroupItem>
+                            <GroupItem caption={'Mapa'}>
 
                             </GroupItem>
 
