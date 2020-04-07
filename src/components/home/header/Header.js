@@ -13,6 +13,7 @@ function Header(props) {
     let history = useHistory();
 
     const open_drawer = CovidStore.open_drawer;
+    const nombres = CovidStore.personal_data.nombres;
 
     const openDrawer = () => {
         CovidStore.getStateOpenDrawer(!open_drawer)
@@ -26,7 +27,7 @@ function Header(props) {
     const renderLogo = () => {
         return (
             <div style={styles.logoContainer}>
-                <span style={{fontWeight: 'bold', fontSize: 12, color: 'white'}}>Bienvenido Julio</span>
+                <span style={{fontWeight: 'bold', fontSize: 12, color: 'white'}}>Bienvenido {nombres}</span>
             </div>
         )
     };

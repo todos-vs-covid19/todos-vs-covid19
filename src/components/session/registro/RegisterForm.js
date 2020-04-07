@@ -8,18 +8,20 @@ import Form, {
     CompareRule,
     ButtonItem,
     NumericRule,
-    StringLengthRule
+    StringLengthRule,
+    PatternRule,
 } from "devextreme-react/form";
 import notify from 'devextreme/ui/notify';
 import '../session_styles.css';
 import {db} from '../../../firebase/Firebase';
 import {useHistory} from "react-router-dom";
 
+
 function RegisterForm() {
 
-     let history = useHistory();
+    let history = useHistory();
 
-    const account = {cedula: '', password: ''};
+    const account = {cedula: '', nombres: '', apellidos: '', password: ''};
 
     const buttonOption = {
         text: 'Crear cuenta',
@@ -37,7 +39,10 @@ function RegisterForm() {
                 if (doc.exists) {
                     notify({message: " Esta cuenta ya a sido creada", width: 300,}, "error", 1000);
                 } else {
-                    users.doc(account.cedula).set({account})
+                    users.doc(account.cedula).set({
+                        account: {id_user: account.cedula, password: account.password},
+                        personal_data: {nombres: account.nombres, apellidos: account.apellidos}
+                    })
                         .then(function () {
                             history.push('/');
                             notify({message: " Su cuenta a sido creada", width: 300,}, "success", 1500);
@@ -53,6 +58,8 @@ function RegisterForm() {
     const passwordComparison = () => {
         return account.password;
     };
+
+    const text_rules = '^[^0-9]+$';
 
     return (
         <div style={styles.formContainer}>
@@ -75,6 +82,16 @@ function RegisterForm() {
                                 <NumericRule message="Ingrese solo numeros"/>
                                 <StringLengthRule message="El numero de cedula debe tener 10 digitos"
                                                   min={10}/>
+                            </SimpleItem>
+
+                            <SimpleItem dataField={'nombres'} editorType="dxTextBox">
+                                <RequiredRule message="Ingrese sus nombre"/>
+                                <PatternRule message="No se pueden ingresar digitos" pattern={text_rules}/>
+                            </SimpleItem>
+
+                            <SimpleItem dataField={'apellidos'} editorType="dxTextBox">
+                                <RequiredRule message="Ingrese sus apellidos"/>
+                                <PatternRule message="No se pueden ingresar digitos" pattern={text_rules}/>
                             </SimpleItem>
 
                             <SimpleItem dataField={'password'} editorType="dxTextBox"
@@ -107,7 +124,7 @@ const styles = {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
-        height: '60%',
+        height: '70%',
     },
     imgSpanContainer: {
         display: 'flex',

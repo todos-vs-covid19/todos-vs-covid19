@@ -1,5 +1,6 @@
 export const items = [
-    {id: 1, text: 'Registro de paciente', icon: "far fa-address-card", descripcion: 'Nombres, apellidos, etc'},
-    {id: 2, text: 'Registro de donaciones', icon: "fas fa-hand-holding-medical", descripcion: 'Medicinas, alimentos, etc'},
-    {id: 3, text: 'Registro de fallecimiento', icon: "fas fa-skull-crossbones", descripcion: 'Nombres, apellidos, etc'},
+    {id: 1, text: 'Sintomas', icon: "fas fa-viruses", descripcion: 'Tos, fiebre, dolores'},
+    {id: 2, text: 'Registrar otro paciente', icon: "far fa-address-card", descripcion: 'Nombres, apellidos, etc'},
+    {id: 3, text: 'Registro de donaciones', icon: "fas fa-hand-holding-medical", descripcion: 'Medicinas, alimentos, etc'},
+    {id: 4, text: 'Registro de fallecimiento', icon: "fas fa-skull-crossbones", descripcion: 'Nombres, apellidos, etc'},
 ];

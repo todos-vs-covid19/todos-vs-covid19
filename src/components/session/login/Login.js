@@ -8,7 +8,7 @@ function Login() {
     return (
         <div className={'main_container'}>
             <div>
-                <img src={login} alt={'s'} style={styles.imgStyles}/>
+                <img src={login} alt={''} style={styles.imgStyles}/>
             </div>
             <div style={styles.formContainer}>
                 <LoginForm/>

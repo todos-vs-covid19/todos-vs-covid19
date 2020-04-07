@@ -46,6 +46,7 @@ function LoginForm(props) {
                     if (password === login.password) {
                         CovidStore.getIdUser(login.cedula);
                         CovidStore.getStateSession(true);
+                        CovidStore.getPersonalData(doc.data().personal_data);
                         history.push('/home');
                         notify({message: "Bienvenido", width: 300,}, "success", 1000);
                     } else {

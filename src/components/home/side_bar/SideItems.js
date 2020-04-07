@@ -10,11 +10,17 @@ function SideItems() {
     let history = useHistory();
 
     const onItemClick = (e) => {
-        if (e.itemData.text === 'Dashboard') {
-          //  history.push("/home/dashboard");
+        if (e.itemData.text === 'Sintomas') {
+            history.push("/home/covid-sintomas");
         }
-        if (e.itemData.text === "Ingresar datos") {
-         //   history.push("/home/datos-hotel");
+        if (e.itemData.text === "Registrar otro paciente") {
+            history.push("/home/otros-pacientes");
+        }
+        if (e.itemData.text === "Registro de donaciones") {
+            history.push("/home/donaciones");
+        }
+        if (e.itemData.text === "Registro de fallecimiento") {
+            history.push("/home/registro-fallecidos");
         }
     };
 
